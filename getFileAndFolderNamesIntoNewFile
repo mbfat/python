@@ -1,0 +1,21 @@
+import os
+import datetime
+
+# Get current working directory
+cwd = os.getcwd()
+
+# Get file and folder names in cwd
+files = os.listdir(cwd)
+folders = [f for f in files if os.path.isdir(os.path.join(cwd, f))]
+files = [f for f in files if os.path.isfile(os.path.join(cwd, f))]
+
+# Format file name with cwd and date
+now = datetime.datetime.now()
+file_name = f"{cwd}_{now.strftime('%Y-%m-%d')}.txt"
+
+# Save files and folders to file
+with open(file_name, 'w') as f:
+    f.write("FILES:\n")
+    f.write('\n'.join(files))
+    f.write("\n\nFOLDERS:\n")
+    f.write('\n'.join(folders))
